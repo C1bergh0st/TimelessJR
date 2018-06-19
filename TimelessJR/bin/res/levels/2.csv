@@ -1,0 +1,17 @@
+id,ObjectType,XDouble,YDouble,WDouble,HDouble,Args
+0,DevFloor,2.0,7.0,1,1,Na
+1,DevFloor,2.0,7.0,1,1,Na
+2,DevFloor,3.0,7.0,1,1,Na
+3,DevFloor,3.0,7.0,1,1,Na
+4,DevFloor,4.0,7.0,1,1,Na
+5,DevFloor,4.0,7.0,1,1,Na
+6,DevFloor,5.0,7.0,1,1,Na
+7,DevFloor,5.0,7.0,1,1,Na
+8,DevFloor,6.0,2.0,1,1,Na
+9,DevFloor,7.0,1.0,1,1,Na
+10,DevFloor,8.0,2.0,1,1,Na
+11,DevFloor,8.0,3.0,1,1,Na
+12,DevFloor,7.0,4.0,1,1,Na
+13,DevFloor,6.0,5.0,1,1,Na
+14,DevFloor,7.0,5.0,1,1,Na
+15,DevFloor,8.0,5.0,1,1,Na

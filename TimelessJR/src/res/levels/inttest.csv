@@ -1,0 +1,6 @@
+id,ObjectType,XDouble,YDouble,WDouble,HDouble,Args
+0,DevFloor,2.0,7.0,1,1,Na
+1,DevFloor,3.0,7.0,1,1,Na
+2,DevFloor,4.0,7.0,1,1,Na
+3,DevFloor,5.0,7.0,1,1,Na
+4,LevelLoadInteractable,3.0,3.0,3.0,3.0,Mario
