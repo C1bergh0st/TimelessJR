@@ -21,6 +21,7 @@ public class Debug {
 		df.setRoundingMode(RoundingMode.HALF_UP);
 		return "("+df.format(x)+";"+df.format(y)+")";
 	}
+	
 	/**
 	public static BufferedImage tci(BufferedImage image)
 	{
