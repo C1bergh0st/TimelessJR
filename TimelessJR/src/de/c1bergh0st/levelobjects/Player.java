@@ -43,8 +43,10 @@ public class Player {
 	public boolean use = false;
 	private double pw = 0.9d;
 	private double ph = 1.8d;
+	private String onDeathLevel;
 	
-	public Player(double x, double y, String imgstr, Level level){
+	public Player(double x, double y, String imgstr, Level level, String fallbacklevel){
+		this.onDeathLevel = fallbacklevel;
 		this.level = level;
 		this.x = x;
 		this.y = y;try {
@@ -134,6 +136,10 @@ public class Player {
 	
 	public void hit(int dmg){
 		Debug.sendErr("Need to implement Damage to Player first");
+	}
+	
+	public void kill(){
+		level.queueLevel(onDeathLevel);
 	}
 	
 	private void drawWalk(Graphics g){
@@ -336,5 +342,7 @@ public class Player {
 		}
 	}
 	
-	
+	public void terminate(){
+		animationtimer.cancel();
+	}
 }

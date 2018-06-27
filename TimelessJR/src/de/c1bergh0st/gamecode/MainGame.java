@@ -97,7 +97,7 @@ public class MainGame extends Canvas implements Runnable{
 	}
 
 	private void tick() {
-		world.tick();
+		world.internaltick();
 	}
 
 	public void render(){

@@ -88,7 +88,10 @@ public class LevelEditor extends Level {
 	
 	public void r(){
 		statics = new LinkedList<StaticObject>();
-		player = new Player(2,2,"Player.png",this);
+		if(player != null){
+			player.terminate();
+		}
+		player = new Player(2,2,"Player.png",this,"base");
 	}
 	
 	
