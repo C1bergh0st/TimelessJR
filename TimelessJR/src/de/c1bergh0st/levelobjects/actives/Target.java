@@ -3,6 +3,7 @@ package de.c1bergh0st.levelobjects.actives;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.gamecode.Level;
 import de.c1bergh0st.levelobjects.Player;
@@ -35,6 +36,7 @@ public class Target extends ActiveObject{
 	@Override
 	public void kill() {
 		level.removeAct.add(this);
+		Debug.send("Target "+toString()+" was destroyed");
 	}
 
 	@Override

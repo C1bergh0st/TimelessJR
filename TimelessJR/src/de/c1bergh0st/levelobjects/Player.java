@@ -125,7 +125,7 @@ public class Player {
 		else{
 			drawIdle(g);
 		}
-//		drawphysbox(g);
+		drawphysbox(g);
 	}
 
 	public Rectangle2D.Double getBounds(){
@@ -133,7 +133,7 @@ public class Player {
 	}
 	
 	public void hit(int dmg){
-		
+		Debug.sendErr("Need to implement Damage to Player first");
 	}
 	
 	private void drawWalk(Graphics g){

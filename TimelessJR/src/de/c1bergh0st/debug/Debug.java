@@ -16,11 +16,6 @@ public class Debug {
 			System.out.println("!!! ERROR !!!  =>"+str);
 	}
 	
-	public static String posconv(double x, double y){
-		DecimalFormat df = new DecimalFormat("#.####");
-		df.setRoundingMode(RoundingMode.HALF_UP);
-		return "("+df.format(x)+";"+df.format(y)+")";
-	}
 	
 	/**
 	public static BufferedImage tci(BufferedImage image)

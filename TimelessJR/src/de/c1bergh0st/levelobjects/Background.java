@@ -15,14 +15,16 @@ public class Background {
 	public BufferedImage[] img;
 	private double offset;
 	private double offsety;
-	private Color bg = new Color(43,87,84);
+	private Color bg;
 	
 	public Background(String filename, int level) throws IOException{
 		img = new BufferedImage[level];
 		for(int i = 1; i <= level; i++){
 			img[i-1] = ImageIO.read(Menu.class.getResourceAsStream("/res/background/"+filename+""+i+".png"));
 		}
-		
+		if(img[level-1] != null){
+			bg = new Color(img[level-1].getRGB(0, 0));
+		}
 	}
 	
 	public void setOffset(double offset){
@@ -41,7 +43,7 @@ public class Background {
 		}
 		int[] offs = new int[img.length];
 		for(int i = 0; i < img.length; i++){
-			offs[i] = (int)(((offset*20)*i)%1920);
+			offs[i] = (int)(((offset*10)*i)%1920);
 		}
 		for(int i = 0; i < img.length; i++){
 			drawParralax(g,i,offs[i]);

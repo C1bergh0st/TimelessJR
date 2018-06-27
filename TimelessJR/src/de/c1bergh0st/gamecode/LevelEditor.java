@@ -55,7 +55,7 @@ public class LevelEditor extends Level {
 		
 //		drawDevBackdrop(g);
 		for (int i = 0; i < decos.size(); i++) {
-			if(decos.get(i).getPoint().distance(campos) < 15){
+			if(decos.get(i).getPoint().distance(campos) < 25){
 				decos.get(i).draw(g);
 			}
 		}
@@ -77,10 +77,11 @@ public class LevelEditor extends Level {
 		
 		g.translate(-(int)(tileoffsetx*TILESIZE), -(int)(tileoffsety*TILESIZE));
 		//No offset
+		drawInfo(g);
 		g.setColor(Color.BLACK);
 		g.drawString("PlayerX: "+ player.x, 5, 120);
-		g.drawString("PlayerDXS: "+ player.dx, 5, 145);
-		g.drawString("PlayerY: "+ player.y, 5, 170);
+		g.drawString("PlayerY: "+ player.y, 5, 145);
+		g.drawString("PlayerDXS: "+ player.dx, 5, 170);
 		g.drawString("PlayerDYS: "+ player.dy, 5, 195);
 		
 	}
@@ -204,8 +205,6 @@ public class LevelEditor extends Level {
 			e.printStackTrace();
 		}
 	}
-
-
 	
 	public void contrPlayer(){
 		centrePlayer();

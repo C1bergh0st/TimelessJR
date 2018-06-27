@@ -1,5 +1,6 @@
 package de.c1bergh0st.gamecode;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
@@ -9,9 +10,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.levelobjects.*;
 import de.c1bergh0st.levelobjects.actives.ActiveObject;
 import de.c1bergh0st.levelobjects.actives.Target;
+import de.c1bergh0st.levelobjects.actives.TestNPC;
 
 public abstract class Level {
 	protected MainGame game;
@@ -49,8 +52,10 @@ public abstract class Level {
 		actives = new LinkedList<ActiveObject>();
 		removeAct = new LinkedList<ActiveObject>();
 		actives.add(new Target(8, 4, this));
+		actives.add(new TestNPC(15,2,this));
+		actives.add(new TestNPC(17,2,this));
 		try {
-			background = new Background("plx",5);
+			background = new Background("ice",5);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -86,8 +91,16 @@ public abstract class Level {
 		player = new Player(2,1.5,"jungle",this);
 		Debug.send("Level: '"+level+"' loaded successfully");
 	}
-
-
+	
+	public Rectangle2D.Double[] getStaticBounds(){
+		Rectangle2D.Double[] temp = new Rectangle2D.Double[statics.size()];
+		for(int i = 0; i < statics.size(); i++){
+			temp[i] = statics.get(i).getBounds();
+		}
+		return temp;
+	}
+	
+	
 	public Interactable getInteractable(Rectangle2D.Double pbounds) {
 		for(int i = 0; i < interactables.size();i++){
 			if (interactables.get(i).getBounds().contains(pbounds)){
@@ -131,7 +144,22 @@ public abstract class Level {
     		removeAct.add(obj);
     	}
     	else{
-    		Debug.sendErr("Object "+obj+" will already be removed!");
+    		Debug.send("Object "+obj+" will already be removed!");
     	}
     }
+
+    protected void drawInfo(Graphics g){
+    	g.setColor(Color.LIGHT_GRAY);
+    	g.fillRect(1700, 0, 200, 100);
+    	g.setColor(Color.BLACK);
+    	g.drawString("Statics:"+statics.size(), 1700, 20);
+    	g.drawString("Actives:"+actives.size(), 1700, 45);
+    	g.drawString("Decos:"+decos.size(), 1700, 70);
+    	g.drawString("Interactables:"+interactables.size(), 1700, 95);
+    }
+
+    public LinkedList<StaticObject> getStatics(){
+    	return statics;
+    }
+    
 }
