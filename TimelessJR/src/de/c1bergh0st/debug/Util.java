@@ -7,9 +7,9 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Util {
-	public static Color REDTRANSPARENT = new Color(255,0,0,120);
-	public static Color GREENTRANSPARENT = new Color(0,255,0,120);
-	public static Color BLUETRANSPARENT = new Color(0,0,255,120);
+	public static Color REDTRANSPARENT = new Color(255,0,0,60);
+	public static Color GREENTRANSPARENT = new Color(0,255,0,60);
+	public static Color BLUETRANSPARENT = new Color(0,0,255,60);
 	
 	
 	public static int toPix(double units){

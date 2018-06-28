@@ -18,6 +18,7 @@ public class EditorPanel extends JPanel {
 	MainGame maingame;
 	
 	public EditorPanel(Window parent) {
+		Debug.send("EDITORPANEL");
 		this.parent = parent;
 		setLayout(null);
 		

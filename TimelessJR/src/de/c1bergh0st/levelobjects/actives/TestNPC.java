@@ -82,7 +82,7 @@ public class TestNPC extends NPC{
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(new Color(0,255,0,100));
+		g.setColor(new Color(0,255,0,200));
 		g.fillRect(Util.toPix(x), Util.toPix(y), Util.toPix(width), Util.toPix(height));
 		drawphysbox(g);
 		Util.drawRect(sensor_left, g, Util.BLUETRANSPARENT);
@@ -98,7 +98,7 @@ public class TestNPC extends NPC{
 
 	@Override
 	public void playerhit(Player player) {
-		
+		player.hit(10);
 	}
 
 	@Override

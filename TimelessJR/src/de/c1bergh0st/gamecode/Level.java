@@ -31,7 +31,6 @@ public abstract class Level {
 	public Player player;
 	public Background background;
 	private String qLevel;
-	private boolean shouldLoad;
 	
 	public Level(MainGame in_game){
 		game = in_game;
@@ -41,7 +40,7 @@ public abstract class Level {
 	
 	public void internaltick(){
 		tick();
-		if(shouldLoad){
+		if(qLevel != null){
 			loadLevel(qLevel);
 		}
 	}
@@ -51,12 +50,11 @@ public abstract class Level {
 	public abstract void mousemoved(int x, int y);
 	
 	public void queueLevel(String level){
-		shouldLoad = true;
 		qLevel = level;
 	}
 	
 	public void loadLevel(String level) {
-		shouldLoad = false;
+		qLevel = null;
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -105,7 +103,7 @@ public abstract class Level {
         if(player != null){
         	player.terminate();
         }
-		player = new Player(2,1.5,"jungle",this,"base");
+		player = new Player(2,1.5,"jungle",this,level);
 		Debug.send("Level: '"+level+"' loaded successfully");
 	}
 	
@@ -167,12 +165,14 @@ public abstract class Level {
 
     protected void drawInfo(Graphics g){
     	g.setColor(Color.LIGHT_GRAY);
-    	g.fillRect(1700, 0, 200, 100);
+    	g.fillRect(1700, 0, 200, 125);
     	g.setColor(Color.BLACK);
     	g.drawString("Statics:"+statics.size(), 1700, 20);
     	g.drawString("Actives:"+actives.size(), 1700, 45);
     	g.drawString("Decos:"+decos.size(), 1700, 70);
     	g.drawString("Interactables:"+interactables.size(), 1700, 95);
+    	g.drawString("Player Health:"+player.getHealth(), 1700, 120);
+    	
     }
 
     public LinkedList<StaticObject> getStatics(){

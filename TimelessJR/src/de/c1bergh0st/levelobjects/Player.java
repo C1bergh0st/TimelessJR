@@ -11,36 +11,25 @@ import java.util.TimerTask;
 import javax.imageio.ImageIO;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.gamecode.Level;
 import de.c1bergh0st.levelobjects.actives.PlayerProjectile;
 
 public class Player {
 	private Level level;
-	public double x;
-	public double y;
-	public double dx;
-	public double dy;
+	public double x, y, dx, dy;
+	private int health;
+	private long lasthurt;
 	public BufferedImage[] idlestack;
 	public BufferedImage[] runstack;
 	private Timer animationtimer;
 	private boolean secondTick;
-	private int curIdle;
-	private int curRun;
-	public BufferedImage jumping;
-	public BufferedImage landing;
-	private Rectangle2D.Double downBox;
-	private Rectangle2D.Double topBox;
-	private Rectangle2D.Double leftBox;
-	private Rectangle2D.Double rightBox;
-	private Rectangle2D.Double jumpBox;
+	private int curIdle, curRun;
+	public BufferedImage jumping, landing;
+	private Rectangle2D.Double downBox, topBox, leftBox, rightBox, jumpBox;
 	public boolean onGround;
-	public boolean up = false;
 	private boolean hasjumped = false;
-	public boolean down = false;
-	public boolean left = false;
-	public boolean right = false;
-	public boolean shift = false;
-	public boolean use = false;
+	public boolean down, left, right, shift, use, up;
 	private double pw = 0.9d;
 	private double ph = 1.8d;
 	private String onDeathLevel;
@@ -49,7 +38,9 @@ public class Player {
 		this.onDeathLevel = fallbacklevel;
 		this.level = level;
 		this.x = x;
-		this.y = y;try {
+		this.y = y;
+		this.health = 100;
+		try {
 			this.jumping = ImageIO.read(Player.class.getResourceAsStream("/res/"+imgstr+"/jump.png"));
 			this.landing = ImageIO.read(Player.class.getResourceAsStream("/res/"+imgstr+"/landing.png"));
 
@@ -128,6 +119,9 @@ public class Player {
 			drawIdle(g);
 		}
 		drawphysbox(g);
+		if(isInvulnerable()){
+			Util.drawRect(getBounds(), g, new Color(255,255,0,150));
+		}
 	}
 
 	public Rectangle2D.Double getBounds(){
@@ -135,7 +129,24 @@ public class Player {
 	}
 	
 	public void hit(int dmg){
-		Debug.sendErr("Need to implement Damage to Player first");
+		if(lasthurt < System.currentTimeMillis()-1000){
+			health -= dmg;
+			lasthurt = System.currentTimeMillis();
+		}
+		if(health <= 0){
+			kill();
+		}
+	}
+	
+	public boolean isInvulnerable(){
+		if(lasthurt < System.currentTimeMillis()-1000){
+			return false;
+		}
+		return true;
+	}
+	
+	public int getHealth(){
+		return health;
 	}
 	
 	public void kill(){

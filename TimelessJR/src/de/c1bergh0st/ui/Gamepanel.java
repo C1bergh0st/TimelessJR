@@ -21,6 +21,7 @@ public class Gamepanel extends JPanel {
 	private int starty;
 	
 	public Gamepanel(Window parent) {
+		Debug.send("GAMEPANEL");
 		this.parent = parent;
 		setLayout(null);
 		
