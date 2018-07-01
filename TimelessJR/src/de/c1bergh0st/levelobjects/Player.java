@@ -132,6 +132,8 @@ public class Player {
 		if(lasthurt < System.currentTimeMillis()-1000){
 			health -= dmg;
 			lasthurt = System.currentTimeMillis();
+//			level.audio.stopBackground();
+			level.audio.playSound("hurt.wav");
 		}
 		if(health <= 0){
 			kill();
@@ -283,6 +285,7 @@ public class Player {
 		else{
 			level.actives.add(new PlayerProjectile(x+pw/2,y+0.4,-0.1,0d,10,level));
 		}
+		level.audio.playSound("shot.wav");
 		Interactable intersect = level.getInteractable(new Rectangle2D.Double(x, y, pw, ph));
 		if(intersect != null){
 			intersect.use();

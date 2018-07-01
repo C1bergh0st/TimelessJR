@@ -66,7 +66,7 @@ public class ImageLoader {
 			try {
 				decotextures[i] = ImageIO.read(Menu.class.getResourceAsStream("/res/deco/"+decotexnames[i]+".png"));
 			} catch (Exception e) {
-				Debug.sendErr("Internal Exception in ImageLoader");
+				Debug.sendErr("Internal Exception in ImageLoader while trying to load:"+decotexnames[i]+" at "+i);
 			}
 		}
 	}

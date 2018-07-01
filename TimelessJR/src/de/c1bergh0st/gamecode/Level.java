@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import de.c1bergh0st.audio.AudioController;
 import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.levelobjects.*;
@@ -31,15 +33,20 @@ public abstract class Level {
 	public Player player;
 	public Background background;
 	private String qLevel;
+	public AudioController audio;
 	
 	public Level(MainGame in_game){
 		game = in_game;
 		imgload = new ImageLoader();
 		decoimgload = new DecoImageLoader();
+		audio = new AudioController();
+//		audio.playSound("/res/sounds/short.wav");
+		audio.playBackground("track.wav");
 	}
 	
 	public void internaltick(){
 		tick();
+		audio.update();
 		if(qLevel != null){
 			loadLevel(qLevel);
 		}
@@ -165,14 +172,14 @@ public abstract class Level {
 
     protected void drawInfo(Graphics g){
     	g.setColor(Color.LIGHT_GRAY);
-    	g.fillRect(1700, 0, 200, 125);
+    	g.fillRect(1700, 0, 200, 150);
     	g.setColor(Color.BLACK);
     	g.drawString("Statics:"+statics.size(), 1700, 20);
     	g.drawString("Actives:"+actives.size(), 1700, 45);
     	g.drawString("Decos:"+decos.size(), 1700, 70);
     	g.drawString("Interactables:"+interactables.size(), 1700, 95);
     	g.drawString("Player Health:"+player.getHealth(), 1700, 120);
-    	
+    	g.drawString("Active Audio:"+audio.playing(), 1700, 145);
     }
 
     public LinkedList<StaticObject> getStatics(){
