@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.ui.Menu;
 
 public class DecoImageLoader {
@@ -47,7 +48,7 @@ public class DecoImageLoader {
 	public BufferedImage getTexByName(String name){
 		if(!map.containsKey(name)){
 			Debug.sendErr("INVALID TEXTURE:"+name);
-			return new BufferedImage(96, 96, BufferedImage.TYPE_INT_ARGB);
+			return new BufferedImage(Util.toPix(1), Util.toPix(1), BufferedImage.TYPE_INT_ARGB);
 		}
 		else{
 			return textures[map.get(name)];

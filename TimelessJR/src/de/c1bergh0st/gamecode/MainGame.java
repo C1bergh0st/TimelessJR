@@ -9,6 +9,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.ui.KeyTable;
 import de.c1bergh0st.ui.Window;
 
 public class MainGame extends Canvas implements Runnable{
@@ -31,8 +32,10 @@ public class MainGame extends Canvas implements Runnable{
 	private long lastSecondTick;
 	
 	public LevelEditor world;
+	public KeyTable keyTable;
 
 	public MainGame(Window p){
+		keyTable = new KeyTable(this);
 		shouldRun = true;
 		parent = p;
 	}

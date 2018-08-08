@@ -16,6 +16,9 @@ public class Debug {
 			System.out.println("!!! ERROR !!!  =>"+str);
 	}
 	
+	public static void log(String str){
+		
+	}
 	
 	/**
 	public static BufferedImage tci(BufferedImage image)

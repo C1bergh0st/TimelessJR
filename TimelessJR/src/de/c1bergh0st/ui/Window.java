@@ -42,9 +42,17 @@ public class Window extends JFrame{
 			revalidate();
 			repaint();
 		}
+		else if(type == "LevelPanel"){
+			getContentPane().removeAll();
+			LevelPanel panel = new LevelPanel(this);
+			add(panel);
+			revalidate();
+			repaint();
+			
+		}
 		else if(type == "Editor"){
 			getContentPane().removeAll();
-			EditorPanel epanel = new EditorPanel(this);
+			EditorGamePanel epanel = new EditorGamePanel(this);
 			add(epanel);
 			revalidate();
 			repaint();

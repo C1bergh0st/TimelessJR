@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.ui.Menu;
 
 public class Background {
@@ -54,6 +55,6 @@ public class Background {
 	
 	
 	private void drawParralax(Graphics g, int i,int divider){
-		g.drawImage(img[i], divider, (int)(offsety*96),1920,1080, null);
+		g.drawImage(img[i], divider, (int)(offsety*Util.toPix(1)),1920,1080, null);
 	}
 }

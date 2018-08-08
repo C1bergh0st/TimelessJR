@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.ui.Menu;
 
 public class ImageLoader {
@@ -127,7 +128,7 @@ public class ImageLoader {
 	public BufferedImage getTileTextureByName(String name){
 		if(!maplist.get(TILE).containsKey(name)){
 			Debug.sendErr("INVALID TEXTURE");
-			return new BufferedImage(96, 96, BufferedImage.TYPE_INT_ARGB);
+			return new BufferedImage(Util.toPix(1), Util.toPix(1), BufferedImage.TYPE_INT_ARGB);
 		}
 		else{
 			return tiletextures[maplist.get(TILE).get(name)];
@@ -137,7 +138,7 @@ public class ImageLoader {
 	public BufferedImage getDecoTextureByName(String name){
 		if(!maplist.get(DECO).containsKey(name)){
 			Debug.sendErr("INVALID TEXTURE");
-			return new BufferedImage(96, 96, BufferedImage.TYPE_INT_ARGB);
+			return new BufferedImage(Util.toPix(1), Util.toPix(1), BufferedImage.TYPE_INT_ARGB);
 		}
 		else{
 			return decotextures[maplist.get(DECO).get(name)];

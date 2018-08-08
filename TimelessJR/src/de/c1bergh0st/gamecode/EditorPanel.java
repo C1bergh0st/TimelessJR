@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
+
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
@@ -48,7 +50,7 @@ public class EditorPanel extends JPanel {
 				Debug.send((String)comboBox.getSelectedItem());
 				parent.parent.currBlock = (String)comboBox.getSelectedItem();
 				try {
-					imgLabel.setIcon(new ImageIcon(getScaledImage(ImageIO.read(new File("src/res/tiles/"+(String)comboBox.getSelectedItem()+".png")),96,96)));
+					imgLabel.setIcon(new ImageIcon(getScaledImage(ImageIO.read(new File("src/res/tiles/"+(String)comboBox.getSelectedItem()+".png")),Util.toPix(1),Util.toPix(1))));
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -108,7 +110,7 @@ public class EditorPanel extends JPanel {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		imgLabel.setBounds(193, 36, 96, 96);
+		imgLabel.setBounds(193, 36, Util.toPix(1), Util.toPix(1));
 		imgLabel.setBorder(null);
 		imgLabel.setText(null);
 		add(imgLabel);

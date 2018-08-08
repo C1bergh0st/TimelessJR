@@ -5,6 +5,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import de.c1bergh0st.debug.Util;
+
 public abstract class StaticObject {
 	private double x;
 	private double y;
@@ -26,7 +28,7 @@ public abstract class StaticObject {
 	
 	public void draw(Graphics g, Point2D.Double cam){
 		if(point.distance(cam) < 20){
-			g.drawImage(img, (int)(x*96), (int)(y*96), 96, 96, null);
+			g.drawImage(img,Util.toPix(x), Util.toPix(y), Util.toPix(1), Util.toPix(1), null);
 		}
 	}
 	

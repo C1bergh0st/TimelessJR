@@ -102,17 +102,17 @@ public class Player {
 		else if(!onGround && dy < 0){
 			//jumping up
 			if(dx < 0){
-				g.drawImage(jumping, (int)((x+pw)*96), (int)(y*96), (int)(-pw*96), (int)(96*ph), null);
+				g.drawImage(jumping, Util.toPix(x+pw), Util.toPix(y), Util.toPix(-pw), Util.toPix(ph), null);
 			}else{
-				g.drawImage(jumping, (int)(x*96), (int)(y*96), (int)(pw*96), (int)(96*ph), null);
+				g.drawImage(jumping, Util.toPix(x), Util.toPix(y), Util.toPix(pw), Util.toPix(ph), null);
 			}
 		}
 		else if(!onGround && dy > 0){
-			//falling down
+			//falling down TODO: Clean this Mess up
 			if(dx < 0){
-				g.drawImage(landing, (int)((x+pw)*96), (int)(y*96), (int)(-(pw*1.1)*96), (int)(96*ph), null);
+				g.drawImage(landing, Util.toPix(x+pw), Util.toPix(y), Util.toPix(-pw*1.1), Util.toPix(ph), null);
 			}else{
-				g.drawImage(landing, (int)(x*96), (int)(y*96), (int)((pw*1.1)*96), (int)(96*ph), null);
+				g.drawImage(landing, Util.toPix(x), Util.toPix(y), Util.toPix(pw*1.1), Util.toPix(ph), null);
 			}
 		}
 		else{
@@ -157,36 +157,36 @@ public class Player {
 	
 	private void drawWalk(Graphics g){
 		if(dx < 0){
-			g.drawImage(runstack[curRun], (int)((x+pw)*96), (int)(y*96), (int)(-(pw*1.1)*96), (int)(96*ph), null);
+			g.drawImage(runstack[curRun], Util.toPix(x+pw), Util.toPix(y), Util.toPix(-(pw*1.1)), Util.toPix(ph), null);
 		}else{
-			g.drawImage(runstack[curRun], (int)(x*96), (int)(y*96), (int)((pw*1.1)*96), (int)(96*ph), null);
+			g.drawImage(runstack[curRun], Util.toPix(x), Util.toPix(y), Util.toPix((pw*1.1)), Util.toPix(ph), null);
 		}
 	}
 
 	private void drawIdle(Graphics g){
 		if(dx < 0){
-			g.drawImage(idlestack[curIdle], (int)((x+pw)*96), (int)(y*96), (int)(-pw*96), (int)(96*ph), null);
+			g.drawImage(idlestack[curIdle], Util.toPix(x+pw), Util.toPix(y), Util.toPix(-pw), Util.toPix(ph), null);
 		}else{
-			g.drawImage(idlestack[curIdle], (int)(x*96), (int)(y*96), (int)(pw*96), (int)(96*ph), null);
+			g.drawImage(idlestack[curIdle], Util.toPix(x), Util.toPix(y), Util.toPix(pw), Util.toPix(ph), null);
 		}
 	}
 	
 	protected void drawphysbox(Graphics g) {
 		g.setColor(Color.RED);
 		if(downBox != null){
-			g.drawRect((int)(downBox.x*96),(int)(downBox.y*96),(int)(downBox.width*96),(int)(downBox.height*96));
+			g.drawRect(Util.toPix(downBox.x),Util.toPix(downBox.y),Util.toPix(downBox.width),Util.toPix(downBox.height));
 		}
 		if(jumpBox != null){
-			g.drawRect((int)(jumpBox.x*96),(int)(jumpBox.y*96),(int)(jumpBox.width*96),(int)(jumpBox.height*96));
+			g.drawRect(Util.toPix(jumpBox.x),Util.toPix(jumpBox.y),Util.toPix(jumpBox.width),Util.toPix(jumpBox.height));
 		}
 		if(leftBox != null){
-			g.drawRect((int)(leftBox.x*96),(int)(leftBox.y*96),(int)(leftBox.width*96),(int)(leftBox.height*96));
+			g.drawRect(Util.toPix(leftBox.x),Util.toPix(leftBox.y),Util.toPix(leftBox.width),Util.toPix(leftBox.height));
 		}
 		if(rightBox != null){
-			g.drawRect((int)(rightBox.x*96),(int)(rightBox.y*96),(int)(rightBox.width*96),(int)(rightBox.height*96));
+			g.drawRect(Util.toPix(rightBox.x),Util.toPix(rightBox.y),Util.toPix(rightBox.width),Util.toPix(rightBox.height));
 		}
 		if(topBox != null){
-			g.drawRect((int)(topBox.x*96),(int)(topBox.y*96),(int)(topBox.width*96),(int)(topBox.height*96));
+			g.drawRect(Util.toPix(topBox.x),Util.toPix(topBox.y),Util.toPix(topBox.width),Util.toPix(topBox.height));
 		}
 		g.setColor(Color.BLACK);
 	}

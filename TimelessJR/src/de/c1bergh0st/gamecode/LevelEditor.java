@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.levelobjects.Decoration;
 import de.c1bergh0st.levelobjects.Interactable;
 import de.c1bergh0st.levelobjects.LevelLoadInteractable;
@@ -214,14 +215,14 @@ public class LevelEditor extends Level {
 	}
 	
 	public void centrePlayer(){
-		tileoffsetx = 9.5-player.x;
-		tileoffsety = 0;
-		if(tileoffsety < player.y-6){
-			tileoffsety = 6-player.y;
-		}
-		if(tileoffsety > player.y-0.5){
-			tileoffsety = 0.5-player.y;
-		}
+		tileoffsetx = 9d-player.x;
+		tileoffsety = 1d;
+//		if(tileoffsety < player.y-5){
+//			tileoffsety = 5-player.y;
+//		}
+//		if(tileoffsety > player.y-0.5){
+//			tileoffsety = 0.5-player.y;
+//		}
 		background.setHeight(tileoffsety);
 	}
 	
@@ -267,7 +268,7 @@ public class LevelEditor extends Level {
 	}
 	
 	private void drawEditorBlock(Graphics g, int x, int y){
-		g.drawRect(x*96, y*96, 96, 96);
+		g.drawRect(x*Level.TILESIZE, y*Level.TILESIZE, Level.TILESIZE, Level.TILESIZE);
 	}
 
 	public void addBlock(int px, int py) {
@@ -326,8 +327,8 @@ public class LevelEditor extends Level {
 	}
 	
 	public void addInteractable(int mx1, int my1, int mx2, int my2){
-		Point2D.Double start = new Point2D.Double((mx1/96d)-tileoffsetx, (my1/96d)-tileoffsety);
-		Point2D.Double stop = new Point2D.Double((mx2/96d)-tileoffsetx, (my2/96d)-tileoffsety);
+		Point2D.Double start = new Point2D.Double((mx1/Util.toPix(1))-tileoffsetx, (my1/Util.toPix(1))-tileoffsety);
+		Point2D.Double stop = new Point2D.Double((mx2/Util.toPix(1))-tileoffsetx, (my2/Util.toPix(1))-tileoffsety);
 		if(currInteractable.equals("LevelLoad")){
 			Rectangle2D.Double testrect = new Rectangle2D.Double(start.x, start.y, stop.x, stop.y);
 			boolean validPlacement = true;
@@ -358,8 +359,8 @@ public class LevelEditor extends Level {
 
 
 	public void mousemoved(int x, int y) {
-		int rx = (int)(((double)x / 96d)-tileoffsetx);
-		int ry = (int)(((double)y / 96d)-tileoffsety);
+		int rx = (int)(((double)x / Util.toPix(1))-tileoffsetx);
+		int ry = (int)(((double)y / Util.toPix(1))-tileoffsety);
 		//Debug.send("Mouse at("+rx+";"+ry+")");
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 
+import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.gamecode.Level;
 import de.c1bergh0st.levelobjects.Player;
 import de.c1bergh0st.levelobjects.StaticObject;
@@ -103,19 +104,19 @@ public abstract class NPC extends ActiveObject{
 	protected void drawphysbox(Graphics g) {
 		g.setColor(Color.RED);
 		if(downBox != null){
-			g.drawRect((int)(downBox.x*96),(int)(downBox.y*96),(int)(downBox.width*96),(int)(downBox.height*96));
+			g.drawRect((int)(downBox.x*Util.toPix(1)),(int)(downBox.y*Util.toPix(1)),(int)(downBox.width*Util.toPix(1)),(int)(downBox.height*Util.toPix(1)));
 		}
 		if(jumpBox != null){
-			g.drawRect((int)(jumpBox.x*96),(int)(jumpBox.y*96),(int)(jumpBox.width*96),(int)(jumpBox.height*96));
+			g.drawRect((int)(jumpBox.x*Util.toPix(1)),(int)(jumpBox.y*Util.toPix(1)),(int)(jumpBox.width*Util.toPix(1)),(int)(jumpBox.height*Util.toPix(1)));
 		}
 		if(leftBox != null){
-			g.drawRect((int)(leftBox.x*96),(int)(leftBox.y*96),(int)(leftBox.width*96),(int)(leftBox.height*96));
+			g.drawRect((int)(leftBox.x*Util.toPix(1)),(int)(leftBox.y*Util.toPix(1)),(int)(leftBox.width*Util.toPix(1)),(int)(leftBox.height*Util.toPix(1)));
 		}
 		if(rightBox != null){
-			g.drawRect((int)(rightBox.x*96),(int)(rightBox.y*96),(int)(rightBox.width*96),(int)(rightBox.height*96));
+			g.drawRect((int)(rightBox.x*Util.toPix(1)),(int)(rightBox.y*Util.toPix(1)),(int)(rightBox.width*Util.toPix(1)),(int)(rightBox.height*Util.toPix(1)));
 		}
 		if(topBox != null){
-			g.drawRect((int)(topBox.x*96),(int)(topBox.y*96),(int)(topBox.width*96),(int)(topBox.height*96));
+			g.drawRect((int)(topBox.x*Util.toPix(1)),(int)(topBox.y*Util.toPix(1)),(int)(topBox.width*Util.toPix(1)),(int)(topBox.height*Util.toPix(1)));
 		}
 		g.setColor(Color.BLACK);
 	}

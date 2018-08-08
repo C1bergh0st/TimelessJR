@@ -73,7 +73,7 @@ public class Menu extends JPanel {
 		button2.setFocusPainted(false);
 		button2.setEnabled(false);
 		button2.setBackground(new Color(59, 89, 182));
-		button2.setBounds(200, 400, 240, 60);
+		button2.setBounds(200, 540, 240, 60);
 		middle.add(button2);
 		
 		JButton button3 = new JButton("About");
@@ -116,7 +116,7 @@ public class Menu extends JPanel {
 		btnLevelEditor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				parent.showLayout("Editor");
+				parent.showLayout("LevelPanel");
 			}
 		});
 		btnLevelEditor.setForeground(Color.WHITE);
@@ -124,7 +124,7 @@ public class Menu extends JPanel {
 		btnLevelEditor.setFocusPainted(false);
 		btnLevelEditor.setEnabled(false);
 		btnLevelEditor.setBackground(new Color(59, 89, 182));
-		btnLevelEditor.setBounds(200, 540, 240, 60);
+		btnLevelEditor.setBounds(200, 400, 240, 60);
 		middle.add(btnLevelEditor);
 		
 		JLabel label = new JLabel("", image, JLabel.CENTER);

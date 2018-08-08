@@ -6,6 +6,8 @@ import java.awt.geom.Rectangle2D;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
+import de.c1bergh0st.gamecode.Level;
+
 public class Util {
 	public static Color REDTRANSPARENT = new Color(255,0,0,60);
 	public static Color GREENTRANSPARENT = new Color(0,255,0,60);
@@ -13,11 +15,11 @@ public class Util {
 	
 	
 	public static int toPix(double units){
-		return (int)(units*96);
+		return (int)(units*Level.TILESIZE);
 	}
 	
 	public static double toUnits(int pixels){
-		return (double)(pixels)/96d;
+		return (double)(pixels)/(Level.TILESIZE*1d);
 	}
 	
 	public static void drawRect(Rectangle2D.Double rect, Graphics g, Color c){

@@ -166,7 +166,7 @@ public abstract class Level {
     		removeAct.add(obj);
     	}
     	else{
-    		Debug.send("Object "+obj+" will already be removed!");
+//    		Debug.send("Object "+obj+" will already be removed!");
     	}
     }
 

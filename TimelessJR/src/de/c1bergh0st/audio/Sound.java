@@ -17,7 +17,6 @@ public class Sound {
 		this.id = id;
 		try {
 			clip = AudioSystem.getClip();
-			Debug.sendErr(path);
 			ais = AudioSystem.getAudioInputStream(Sound.class.getResourceAsStream(path));
 			clip.open(ais);
 			if(looping){
