@@ -186,4 +186,8 @@ public abstract class Level {
     	return statics;
     }
     
+    public MainGame getMainGame(){
+    	return game;
+    }
+    
 }

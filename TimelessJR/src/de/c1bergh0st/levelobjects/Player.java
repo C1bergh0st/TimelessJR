@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.gamecode.Level;
+import de.c1bergh0st.input.InputHandler;
 import de.c1bergh0st.levelobjects.actives.PlayerProjectile;
 
 public class Player {
@@ -33,8 +34,11 @@ public class Player {
 	private double pw = 0.9d;
 	private double ph = 1.8d;
 	private String onDeathLevel;
+	private InputHandler input;
+	private long lastuse;
 	
 	public Player(double x, double y, String imgstr, Level level, String fallbacklevel){
+		this.input = level.getMainGame().getInputHandler();
 		this.onDeathLevel = fallbacklevel;
 		this.level = level;
 		this.x = x;
@@ -204,72 +208,91 @@ public class Player {
 	}
 
 	private void input() {
+//		Debug.send(""+input.isDown("shift"));
 		if(!up && onGround){
 			hasjumped = false;
 		}
 		double maxspeed = 4d;
 		double maxspeedpertick = maxspeed/120d;
+		double maxrunspeedpertick = maxspeedpertick * 1.5d;
 		double accel = 0.5d;
 		double airspeed = 0.1;
-		double maxairspeed = 0.5;
+		double maxairspeed = 0.8;
 		boolean moved = false;
 		if(use){
 			tryUse();
 		}
-		if(up && !hasjumped &&onGround){
+		if(input.isDown("up") && !hasjumped &&onGround){
 			dy =-(9.4f/120);
 			hasjumped = true;
 		}
-		if(left && dx > -maxspeedpertick*maxairspeed && !onGround){
-			dx -= (accel/(120))*airspeed;
-			if(dx > 0){
-				applyDrag();
+		
+		//LEFT
+		if(input.isDown("left")){
+			//LEFT AND ON THE GROUND
+			if(onGround){
+				//LEFT !NOT! RUNNUNG ON GROUND
+				if(dx > -maxspeedpertick &&  !input.isDown("shift")){
+					dx -= (accel/(120));
+					if(dx > 0){
+						applyDrag();
+					}
+				}
+				//LEFT RUNNING ON GROUND
+				if(dx > -(maxrunspeedpertick) && input.isDown("shift")){
+					dx -= (accel/(120));
+					if(dx > 0){
+						//applyDrag();
+					}
+				}
+				
+			}
+			//LEFT JUMPING
+			if(dx > -maxspeedpertick*maxairspeed && !onGround){
+				dx -= (accel/(120))*airspeed;
+				if(dx > 0){
+					applyDrag();
+				}
 			}
 		}
-		if(left && dx > -maxspeedpertick && onGround && !shift){
-			dx -= (accel/(120));
-			if(dx > 0){
-				applyDrag();
+		//RIGHT
+		if(input.isDown("right")){
+			//RIGHT AND ON THE GROUND
+			if(onGround){
+				//RIGHT !NOT! RUNNING ON GROUND
+				if(dx < maxspeedpertick && !input.isDown("shift")){
+					dx += (accel/(120));
+					if(dx < 0){
+						applyDrag();
+					}
+				}
+				//RIGHT RUNNING ON GROUND
+				if(dx < maxrunspeedpertick && input.isDown("shift")){
+					dx += (accel/(120));
+					if(dx < 0){
+						applyDrag();
+					}
+				}
+			}
+			//RIGHT JUMPING
+			if(dx < maxspeedpertick*maxairspeed && !onGround){
+				dx += (accel/(120))*airspeed;
+				if(dx < 0){
+					applyDrag();
+				}
+			}
+			
+		}
+		
+		if(input.isDown("use")){
+			if(lastuse < System.currentTimeMillis()-300){
+				tryUse();
+				lastuse = System.currentTimeMillis();
 			}
 		}
-		if(left && dx > -(maxspeedpertick*1.5) && onGround && shift){
-			dx -= (accel/(120));
-			if(dx > 0){
-				applyDrag();
-			}
-		}
-		if(right && dx < maxspeedpertick*maxairspeed && !onGround){
-			dx += (accel/(120))*airspeed;
-			if(dx < 0){
-				applyDrag();
-			}
-		}
-		if(right && dx < maxspeedpertick && onGround && !shift){
-			dx += (accel/(120));
-			if(dx < 0){
-				applyDrag();
-			}
-		}
-		if(right && dx < maxspeedpertick*1.5 && onGround && shift){
-			dx += (accel/(120));
-			if(dx < 0){
-				applyDrag();
-			}
-		}
-		if(left || right){
+		
+		if(input.isDown("left") || input.isDown("right")){
 			moved = true;
-		}
-		if(dx > maxspeedpertick*1.5 && !onGround){
-			dx = maxspeedpertick*1.5;
-		}
-		if(dx < -maxspeedpertick*1.5 && !onGround){
-			dx = -maxspeedpertick*1.5;
-		}
-		if(dx > maxspeedpertick && onGround && !shift){
-			dx = maxspeedpertick;
-		}
-		if(dx < -maxspeedpertick && onGround && !shift){
-			dx = -maxspeedpertick;
 		}
 		
 		if(!moved){

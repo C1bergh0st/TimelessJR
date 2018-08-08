@@ -9,7 +9,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferStrategy;
 
 import de.c1bergh0st.debug.Debug;
-import de.c1bergh0st.ui.KeyTable;
+import de.c1bergh0st.input.InputHandler;
 import de.c1bergh0st.ui.Window;
 
 public class MainGame extends Canvas implements Runnable{
@@ -32,10 +32,10 @@ public class MainGame extends Canvas implements Runnable{
 	private long lastSecondTick;
 	
 	public LevelEditor world;
-	public KeyTable keyTable;
+	public InputHandler input;
 
 	public MainGame(Window p){
-		keyTable = new KeyTable(this);
+		input = new InputHandler();
 		shouldRun = true;
 		parent = p;
 	}
@@ -143,4 +143,7 @@ public class MainGame extends Canvas implements Runnable{
 		return world;
 	}
 	
+	public InputHandler getInputHandler(){
+		return input;
+	}
 }

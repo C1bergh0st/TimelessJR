@@ -8,6 +8,8 @@ import javax.swing.KeyStroke;
 
 import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.gamecode.MainGame;
+import de.c1bergh0st.input.InputHandler;
+import de.c1bergh0st.input.KeyStatusChange;
 
 import java.awt.Canvas;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,7 @@ public class EditorGamePanel extends JPanel {
 	
 	Window parent;
 	MainGame maingame;
+	InputHandler input;
 	
 	public EditorGamePanel(Window parent) {
 		Debug.send("EDITORPANEL");
@@ -29,6 +32,7 @@ public class EditorGamePanel extends JPanel {
 		setLayout(null);
 		
 		Canvas canvas = new MainGame(parent);
+		maingame = (MainGame) canvas;
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -51,27 +55,61 @@ public class EditorGamePanel extends JPanel {
 			}
 		});
 		
+		
+		input = maingame.getInputHandler();
 		InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		ActionMap am = getActionMap();
-
-        im.put(pressed(KeyEvent.VK_SHIFT), "pressed");
-        System.out.println(KeyEvent.VK_SHIFT);
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, 0, true), "released");
-        
-		am.put("pressed", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Pressed");
-            }
-        });
-
-        am.put("released", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("released");
-            }
-        });
 		
+		//SHIFT
+        im.put(pressed(KeyEvent.VK_SHIFT), "shiftpressed");
+		am.put("shiftpressed", new KeyStatusChange(input,"shift",true));
+        im.put(released(KeyEvent.VK_SHIFT), "shiftreleased");
+        am.put("shiftreleased", new KeyStatusChange(input,"shift",false));
+
+		//LEFT
+        im.put(pressed(KeyEvent.VK_A), "apressed");
+        im.put(pressed2(KeyEvent.VK_A), "apressed");
+		am.put("apressed", new KeyStatusChange(input,"left",true));
+        im.put(released(KeyEvent.VK_A), "areleased");
+        im.put(released2(KeyEvent.VK_A), "areleased");
+        am.put("areleased", new KeyStatusChange(input,"left",false));
+
+		//RIGHT
+        im.put(pressed(KeyEvent.VK_D), "dpressed");
+        im.put(pressed2(KeyEvent.VK_D), "dpressed");
+		am.put("dpressed", new KeyStatusChange(input,"right",true));
+        im.put(released(KeyEvent.VK_D), "dreleased");
+        im.put(released2(KeyEvent.VK_D), "dreleased");
+        am.put("dreleased", new KeyStatusChange(input,"right",false));
+
+		//UP
+        im.put(pressed(KeyEvent.VK_W), "wpressed");
+        im.put(pressed2(KeyEvent.VK_W), "wpressed");
+		am.put("wpressed", new KeyStatusChange(input,"up",true));
+        im.put(released(KeyEvent.VK_W), "wreleased");
+        im.put(released2(KeyEvent.VK_W), "wreleased");
+        am.put("wreleased", new KeyStatusChange(input,"up",false));
+        
+        //USE
+        im.put(pressed(KeyEvent.VK_E), "epressed");
+        im.put(pressed2(KeyEvent.VK_E), "epressed");
+		am.put("epressed", new KeyStatusChange(input,"use",true));
+        im.put(released(KeyEvent.VK_E), "ereleased");
+        im.put(released2(KeyEvent.VK_E), "ereleased");
+        am.put("ereleased", new KeyStatusChange(input,"use",false));
+        
+		
+        
+//        am.put("shiftpressed", new AbstractAction(){
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Debug.send("PRESS");
+//			}
+//        	
+//        });
+        
+        
 //		canvas.addKeyListener(new KeyAdapter() {
 //			@Override
 //			public void keyTyped(KeyEvent e){
@@ -141,7 +179,6 @@ public class EditorGamePanel extends JPanel {
 //		
 		canvas.setBounds(0, 0, 1920, 1080);
 		add(canvas);
-		maingame = (MainGame) canvas;
 	}
 	
 	private KeyStroke pressed(int key){
@@ -155,6 +192,14 @@ public class EditorGamePanel extends JPanel {
 		return KeyStroke.getKeyStroke(key, 0, true);
 	}
 
+	
+	private KeyStroke pressed2(int key){
+		return KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK, false);
+	}
+	
+	private KeyStroke released2(int key){
+		return KeyStroke.getKeyStroke(key, InputEvent.SHIFT_DOWN_MASK, true);
+	}
 	public MainGame getMainGame() {
 		return maingame;
 	}
