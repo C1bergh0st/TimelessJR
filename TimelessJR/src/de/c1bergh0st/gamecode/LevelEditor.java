@@ -65,7 +65,6 @@ public class LevelEditor extends Level {
 			statics.get(i).draw(g,campos);
 		}
 		
-		player.draw(g);
 		
 
 		for(int i = 0; i< actives.size(); i++){
@@ -75,6 +74,8 @@ public class LevelEditor extends Level {
 		for(int i = 0; i < interactables.size();i++){
 			interactables.get(i).devDraw(g);
 		}
+		
+		player.draw(g);
 		
 		g.translate(-(int)(tileoffsetx*TILESIZE), -(int)(tileoffsety*TILESIZE));
 		//No offset
@@ -126,7 +127,7 @@ public class LevelEditor extends Level {
 		}
 		for(ActiveObject obj : actives){
 			for(ActiveObject obj2 : actives){
-				if(obj.getBounds().intersects(obj2.getBounds()) && obj != obj2){
+				if(obj.getBounds().intersects(obj2.getBounds()) && obj != obj2 && obj.isSolid()  && obj2.isSolid()){
 					obj.activehit(obj2);
 				}
 			}

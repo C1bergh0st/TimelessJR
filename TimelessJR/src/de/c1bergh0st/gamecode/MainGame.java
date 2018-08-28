@@ -1,12 +1,8 @@
 package de.c1bergh0st.gamecode;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
 
 import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.input.InputHandler;
@@ -33,6 +29,7 @@ public class MainGame extends Canvas implements Runnable{
 	
 	public LevelEditor world;
 	public InputHandler input;
+	public Font custFont;
 
 	public MainGame(Window p){
 		input = new InputHandler();
@@ -77,6 +74,15 @@ public class MainGame extends Canvas implements Runnable{
 	private void init() {
 		drawLoadingScreen();
 		world = new LevelEditor(this);
+		try {
+		     GraphicsEnvironment ge = 
+		         GraphicsEnvironment.getLocalGraphicsEnvironment();
+		     custFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/res/medium.ttf")).deriveFont(20f);
+		     ge.registerFont(custFont);
+		     System.out.println("FONT DONE");
+		} catch (Exception e) {
+		     e.printStackTrace();
+		}
 	}
 
 	private void drawLoadingScreen() {
@@ -126,7 +132,7 @@ public class MainGame extends Canvas implements Runnable{
 	}
 
 	private void applySettings(Graphics g) {
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+		g.setFont(custFont); 
 		g.setColor(BACKGROUNDCOLOR);
 		g.fillRect(0, 0, getWidth(), getHeight()); 
 	}

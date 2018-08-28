@@ -33,6 +33,7 @@ public class EditorGamePanel extends JPanel {
 		
 		Canvas canvas = new MainGame(parent);
 		maingame = (MainGame) canvas;
+		
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -46,6 +47,7 @@ public class EditorGamePanel extends JPanel {
 				Debug.send("Mouse Released:"+e.getButton()+" At px = "+e.getX()+" ; py = "+e.getY());
 			}
 		});
+		
 		canvas.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent me) {
@@ -99,15 +101,6 @@ public class EditorGamePanel extends JPanel {
         am.put("ereleased", new KeyStatusChange(input,"use",false));
         
 		
-        
-//        am.put("shiftpressed", new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Debug.send("PRESS");
-//			}
-//        	
-//        });
         
         
 //		canvas.addKeyListener(new KeyAdapter() {

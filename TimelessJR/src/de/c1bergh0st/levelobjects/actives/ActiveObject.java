@@ -13,6 +13,7 @@ public abstract class ActiveObject {
 	private int health;
 	protected Level level;
 	protected String data;
+	private boolean collidable;
 	
 	public ActiveObject(double x,double y, double width, double height, double dx, double dy, int health, Level level, String data){
 		this.x = x;
@@ -24,6 +25,7 @@ public abstract class ActiveObject {
 		this.health = health;
 		this.level = level;
 		this.data = data;
+		collidable = true;
 	}
 	
 	public abstract String getType();
@@ -40,7 +42,18 @@ public abstract class ActiveObject {
 	}
 	
 	public Rectangle2D.Double getBounds(){
-		return new Rectangle2D.Double(x, y, width, height);
+//		if(collidable){
+			return new Rectangle2D.Double(x, y, width, height);
+//		}
+//		return new Rectangle2D.Double(-1000, -1000, 1, 1);
+	}
+	
+	public void setCollision(boolean value){
+		collidable = value;
+	}
+	
+	public boolean isSolid(){
+		return collidable;
 	}
 	
 	public abstract void playerhit(Player player);

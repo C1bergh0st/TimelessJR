@@ -14,9 +14,7 @@ import de.c1bergh0st.audio.AudioController;
 import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.debug.Util;
 import de.c1bergh0st.levelobjects.*;
-import de.c1bergh0st.levelobjects.actives.ActiveObject;
-import de.c1bergh0st.levelobjects.actives.Target;
-import de.c1bergh0st.levelobjects.actives.TestNPC;
+import de.c1bergh0st.levelobjects.actives.*;
 
 public abstract class Level {
 	protected MainGame game;
@@ -71,8 +69,11 @@ public abstract class Level {
 		actives = new LinkedList<ActiveObject>();
 		removeAct = new LinkedList<ActiveObject>();
 		actives.add(new Target(8, 4, this));
-		actives.add(new TestNPC(15,2,this));
-		actives.add(new TestNPC(17,2,this));
+//		actives.add(new TestNPC(15,2,this));
+		actives.add(new EnemyBlob(17,2,this));
+		actives.add(new EnemyBlob(19,2,this));
+		actives.add(new EnemyBlob(21,2,this));
+		actives.add(new IceSpike(10,4,this));
 		try {
 			background = new Background("ice",5);
 		} catch (IOException e1) {

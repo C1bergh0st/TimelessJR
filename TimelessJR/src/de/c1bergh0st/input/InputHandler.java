@@ -6,7 +6,7 @@ import java.util.Map;
 import de.c1bergh0st.debug.Debug;
 
 public class InputHandler {
-	private boolean showPresses = true;
+	private boolean showPresses = false;
 	
 	
 	private Map<String, Integer> map = new HashMap<String, Integer>();

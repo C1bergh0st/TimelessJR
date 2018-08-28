@@ -36,6 +36,7 @@ public class Player {
 	private String onDeathLevel;
 	private InputHandler input;
 	private long lastuse;
+	private boolean jumpOverride; 
 	
 	public Player(double x, double y, String imgstr, Level level, String fallbacklevel){
 		this.input = level.getMainGame().getInputHandler();
@@ -92,6 +93,10 @@ public class Player {
 			}
 			
 		}, 50, 50);
+	}
+	
+	public void renewJump(){
+		jumpOverride = true;
 	}
 	
 	public void draw(Graphics g){
@@ -209,7 +214,7 @@ public class Player {
 
 	private void input() {
 //		Debug.send(""+input.isDown("shift"));
-		if(!up && onGround){
+		if(!input.isDown("up") && onGround ){
 			hasjumped = false;
 		}
 		double maxspeed = 4d;
@@ -218,13 +223,26 @@ public class Player {
 		double accel = 0.5d;
 		double airspeed = 0.1;
 		double maxairspeed = 0.8;
+		long maxairtime = 10000;
+		long startairtime = 0;
+		
 		boolean moved = false;
-		if(use){
-			tryUse();
-		}
+		
 		if(input.isDown("up") && !hasjumped &&onGround){
-			dy =-(9.4f/120);
+			
+			//dy = -(9.4f/120);
 			hasjumped = true;
+			startairtime = System.currentTimeMillis();
+		}
+		if(input.isDown("up") && System.currentTimeMillis()-startairtime < maxairtime || jumpOverride){
+			jumpOverride = false;
+			dy = -(9.4f/120);
+			Debug.send("jumping");
+		}
+		if(!input.isDown("up") && hasjumped && !onGround){
+			if(dy < 0){
+				dy = dy*0.93d;	
+			}
 		}
 		
 		//LEFT
@@ -237,6 +255,9 @@ public class Player {
 					if(dx > 0){
 						applyDrag();
 					}
+				}
+				if(dx < -maxspeedpertick && !input.isDown("shift")){
+					dx = -maxspeedpertick;
 				}
 				//LEFT RUNNING ON GROUND
 				if(dx > -(maxrunspeedpertick) && input.isDown("shift")){
@@ -265,6 +286,9 @@ public class Player {
 					if(dx < 0){
 						applyDrag();
 					}
+				}
+				if(dx > maxspeedpertick && !input.isDown("shift")){
+					dx = maxspeedpertick;
 				}
 				//RIGHT RUNNING ON GROUND
 				if(dx < maxrunspeedpertick && input.isDown("shift")){
