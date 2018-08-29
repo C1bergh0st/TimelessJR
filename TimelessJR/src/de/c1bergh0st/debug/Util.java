@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.concurrent.ThreadLocalRandom;
 
 import de.c1bergh0st.gamecode.Level;
 
@@ -33,5 +34,9 @@ public class Util {
 		DecimalFormat df = new DecimalFormat("#.####");
 		df.setRoundingMode(RoundingMode.HALF_UP);
 		return "("+df.format(x)+";"+df.format(y)+")";
+	}
+	
+	public static int randInt(int min, int max){
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
 	}
 }

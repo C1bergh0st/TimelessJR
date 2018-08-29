@@ -99,7 +99,7 @@ public class EditorPanel extends JPanel {
 		});
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parent.parent.loadLevel(textField_1.getText());
+				parent.parent.queueLevel(textField_1.getText());
 			}
 		});
 		

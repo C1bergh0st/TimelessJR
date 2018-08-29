@@ -106,9 +106,15 @@ public class LevelEditor extends Level {
 			ob.tick();
 		}
 		collision();
+		for(ActiveObject ob: addAct){
+			actives.add(ob);
+			Debug.send("Added obj"+ob.getType());
+		}
+		addAct.clear();
 		for(ActiveObject ob: removeAct){
 			actives.remove(ob);
 		}
+		removeAct.clear();
 	}
 	
 	private void collision() {

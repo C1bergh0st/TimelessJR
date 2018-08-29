@@ -18,12 +18,14 @@ public class IceSpike extends NPC{
 	private int animationIndex;
 	private long nextAnimationIndex;
 	private boolean exploding;
+	private boolean shardsSpawned;
 	private int[] ANIMATIONSPEED = {120,120,120,120,150,150,300,200,300,400,500,600,0};
 
 	public IceSpike(double x, double y, Level level) {
 		super(x, y, 1, 2.5, 40, level, "");
 		explosion = new BufferedImage[13];
 		exploding = false;
+		shardsSpawned = false;
 		animationIndex = 0;
 		try {
 			this.idle = ImageIO.read(IceSpike.class.getResourceAsStream("/res/enemys/crystal/idle.png"));
@@ -43,22 +45,29 @@ public class IceSpike extends NPC{
 
 	@Override
 	public void tick() {
-		ANIMATIONSPEED[6] = 300;
-		ANIMATIONSPEED[7] = 200;
-		ANIMATIONSPEED[8] = 300;
-		ANIMATIONSPEED[9] = 400;
-		ANIMATIONSPEED[10] = 500;
-		ANIMATIONSPEED[11] = 600;
 		//If Exploding has begun we increment the animationIndex every ANIMATIONSPEED ms by 1 until it reaches 11
 		if(exploding){
 			if(nextAnimationIndex < System.currentTimeMillis() && animationIndex < 12){
 				animationIndex++;
 				nextAnimationIndex += ANIMATIONSPEED[animationIndex];
 			}
+			if(animationIndex == 10 && !shardsSpawned){
+				shardsSpawned = true;
+				double shardspeed = 4d/120d;
+				level.queueActive(new IceSplinter(x+(width/2),y+(height/5),0,-(10d*rand())/120d,level));
+				level.queueActive(new IceSplinter(x+(width/4),y+(height/3),shardspeed*rand(),-(10d*rand())/120d,level));
+				level.queueActive(new IceSplinter(x+(width/4)*3,y+(height/3),-shardspeed*rand(),-(10d*rand())/120d,level));
+				level.queueActive(new IceSplinter(x+(width/4),y+(height/3)*2,shardspeed*rand(),-(6d*rand())/120d,level));
+				level.queueActive(new IceSplinter(x+(width/4)*3,y+(height/3)*2,-shardspeed*rand(),-(6d*rand())/120d,level));
+			}
 		}
 		this.physic();
 		this.applyforce();
 		this.collisonLoop();
+	}
+	
+	private double rand(){
+		return (0.9d+(Util.randInt(0, 20)*0.01d));
 	}
 	
 	public void trigger(){

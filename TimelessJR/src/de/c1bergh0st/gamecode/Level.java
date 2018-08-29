@@ -26,6 +26,7 @@ public abstract class Level {
 	public LinkedList<Decoration> decos;
 	public LinkedList<ActiveObject> actives;
 	public LinkedList<ActiveObject> removeAct;
+	public LinkedList<ActiveObject> addAct;
 	public ImageLoader imgload;
 	public DecoImageLoader decoimgload;
 	public Player player;
@@ -68,12 +69,15 @@ public abstract class Level {
 		decos = new LinkedList<Decoration>();
 		actives = new LinkedList<ActiveObject>();
 		removeAct = new LinkedList<ActiveObject>();
+		addAct = new LinkedList<ActiveObject>();
 		actives.add(new Target(8, 4, this));
 //		actives.add(new TestNPC(15,2,this));
 		actives.add(new EnemyBlob(17,2,this));
 		actives.add(new EnemyBlob(19,2,this));
 		actives.add(new EnemyBlob(21,2,this));
-		actives.add(new IceSpike(10,4,this));
+		for(int i = 0; i < 5; i++){
+			actives.add(new IceSpike(10+i*2,4,this));
+		}
 		try {
 			background = new Background("ice",5);
 		} catch (IOException e1) {
@@ -171,6 +175,12 @@ public abstract class Level {
     	}
     }
 
+    public void queueActive(ActiveObject obj){
+    	if(!addAct.contains(obj)){
+    		addAct.add(obj);
+    	}
+    }
+    
     protected void drawInfo(Graphics g){
     	g.setColor(Color.LIGHT_GRAY);
     	g.fillRect(1700, 0, 200, 150);

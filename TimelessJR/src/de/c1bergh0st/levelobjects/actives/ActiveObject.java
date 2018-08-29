@@ -42,10 +42,7 @@ public abstract class ActiveObject {
 	}
 	
 	public Rectangle2D.Double getBounds(){
-//		if(collidable){
-			return new Rectangle2D.Double(x, y, width, height);
-//		}
-//		return new Rectangle2D.Double(-1000, -1000, 1, 1);
+		return new Rectangle2D.Double(x, y, width, height);
 	}
 	
 	public void setCollision(boolean value){
